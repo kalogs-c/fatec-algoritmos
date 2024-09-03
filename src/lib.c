@@ -1,4 +1,13 @@
-int add(int a, int b) { return a + b; }
+#include <stdbool.h>
+#include <stdio.h>
+
+void wait_for_keypress_char(int (*validate)(void *), void *data) {
+  scanf("%c", (char *)data);
+
+  while (!validate(data)) {
+    scanf("%c", (char *)data);
+  }
+}
 
 char classify_person(float height, float weight) {
   if (height < 1.20) {
@@ -28,4 +37,19 @@ char classify_person(float height, float weight) {
   } else {
     return 'I';
   }
+}
+
+typedef bool (*ValidationFunc)(char);
+char readCharWithValidation(ValidationFunc validate, char *message) {
+  char ch;
+
+  while (true) {
+    printf("%s", message);
+    ch = getchar();
+
+    if (validate(ch)) {
+      break;
+    }
+  }
+  return ch;
 }

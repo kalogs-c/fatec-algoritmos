@@ -19,17 +19,12 @@ int failed = 0;
 #define ASSERT_STR_EQ(str1, str2) ASSERT(strcmp(str1, str2) == 0)
 // End of test helpers
 
-TEST(test_add) {
-  ASSERT(add(1, 2) == 3);
-  ASSERT(add(0, 0) == 0);
-  ASSERT(add(-1, -1) == -2);
-}
-
 TEST(test_string_assert) { ASSERT_STR_EQ("hello", "hello"); }
+
+int validate(char key, void *data) { return key == *(char *)data; }
 
 int main() {
   // Add a `RUN_TEST` line for each test function
-  RUN_TEST(test_add);
   RUN_TEST(test_string_assert);
   return failed;
 }
