@@ -1,8 +1,21 @@
-#include <stdio.h>
 #include "lib.c"
+#include <stdio.h>
 
+#define EX25
+
+#ifdef EX25
 int main() {
-  int result = add(40, 2);
-  printf("40 + 2 = %d\n", result);
+  float weight;
+  float height;
+
+  printf("weight: ");
+  scanf("%f", &weight);
+
+  printf("height: ");
+  scanf("%f", &height);
+
+  printf("%c\n", classify_person(height, weight));
+
   return 0;
 }
+#endif
