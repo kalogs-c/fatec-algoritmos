@@ -1,13 +1,6 @@
+#include <stdarg.h>
 #include <stdbool.h>
 #include <stdio.h>
-
-void wait_for_keypress_char(int (*validate)(void *), void *data) {
-  scanf("%c", (char *)data);
-
-  while (!validate(data)) {
-    scanf("%c", (char *)data);
-  }
-}
 
 char classify_person(float height, float weight) {
   if (height < 1.20) {
@@ -52,4 +45,15 @@ char readCharWithValidation(ValidationFunc validate, char *message) {
     }
   }
   return ch;
+}
+
+float readNumber(char *message, ...) {
+  va_list args;
+  va_start(args, message);
+  float number;
+  printf(message, args);
+  scanf("%f", &number);
+  va_end(args);
+
+  return number;
 }
