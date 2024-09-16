@@ -51,7 +51,7 @@ float readNumber(char *message, ...) {
   va_list args;
   va_start(args, message);
   float number;
-  printf(message, args);
+  vfprintf(stderr, message, args);
   scanf("%f", &number);
   va_end(args);
 

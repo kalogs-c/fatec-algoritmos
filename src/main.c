@@ -1,91 +1,143 @@
 #include "lib.c"
 #include <stdio.h>
 
-#define EX10
+#define ATV4
 
-#ifdef EX2
+#ifdef ATV1
+#include <math.h>
+
 int main() {
-  float valor, reajuste;
+  float result = 0;
+  float numeros[4];
 
   do {
-    printf("Coloca um numero: ");
-    scanf("%f", &valor);
-  } while (valor <= 0);
+    do {
+      numeros[0] = readNumber("Digite um valor entre 10 e 25: ");
+    } while (numeros[0] <= 10 || numeros[0] >= 25);
 
-  reajuste = valor * 1.1;
-  printf("O valor reajustado é de %f\n", reajuste);
+    do {
+      numeros[1] = readNumber("Digite um valor maior que 0: ");
+    } while (numeros[1] <= 0);
+
+    numeros[2] = numeros[0] + numeros[1];
+    numeros[3] = numeros[0] * numeros[1] * numeros[2];
+
+    for (int i = 0; i < 4; i++) {
+      result += pow(numeros[i], 2);
+    }
+
+    if (result < 50000) {
+      printf("O resultado é menor que 50000");
+    }
+  } while (result < 50000);
+
+  printf("O resultado é %f\n", result);
+
   return 0;
 }
-#endif /* ifdef EX2 */
+#endif /* ifdef ATV1 */
 
-#ifdef EX4
-float get_desconto_inss(float salario) {
-  if (salario <= 1100) {
-    return 0.0;
-  } else if (salario <= 2203.48) {
-    return 0.075;
-  } else if (salario <= 3305.22) {
-    return 0.09;
-  } else if (salario <= 6433.57) {
-    return 0.12;
+#ifdef ATV2
+char get_conceito(float media_aproveitamento) {
+  if (media_aproveitamento >= 9.0) {
+    return 'A';
+  } else if (media_aproveitamento >= 7.5) {
+    return 'B';
+  } else if (media_aproveitamento >= 6.0) {
+    return 'C';
+  } else if (media_aproveitamento >= 4.0) {
+    return 'D';
   } else {
-    return 0.14;
+    return 'E';
   }
 }
 
 int main() {
-  float hora_aula = readNumber("Digite o valor da hora de aula: ");
-  float numero_de_aulas = readNumber("Digite o valor das aulas: ");
+  int id = readNumber("Digite o numero de identificação: ");
+  float notas[3];
 
-  float salario_bruto = hora_aula * numero_de_aulas;
+  for (int i = 0; i < 3; i++) {
+    do {
+      notas[i] = readNumber("Digite a %dº nota: ", i + 1);
+    } while (notas[i] < 0 || notas[i] > 10);
+  }
 
-  float desconto_inss = get_desconto_inss(salario_bruto);
+  float media_dos_ex = readNumber("Digite a media dos exercícios: ");
 
-  float salario_liquido = salario_bruto - (salario_bruto * desconto_inss);
+  float media_aproveitamento =
+      (notas[0] + notas[1] * 2 + notas[2] * 3 + media_dos_ex) / 7;
 
-  printf("Salario liquido: %.2f\n", salario_liquido);
+  char conceito = get_conceito(media_aproveitamento);
+  char *status = conceito == 'D' || conceito == 'E' ? "REPROVADO" : "APROVADO";
+
+  printf("O aluno de ID %d esta %s com média %.1f e conceito %c\n", id, status,
+         media_aproveitamento, conceito);
+
+  printf("%s\n", status);
+
   return 0;
 }
-#endif /* ifdef EX4 */
+#endif /* ifdef ATV2 */
 
-#ifdef EX10
+#ifdef ATV3
 int main() {
-  float produto, inflacao;
+  float nums[3];
 
   do {
-    produto = readNumber("Digite o preco do produto\n");
-  } while (produto <= 0);
+    for (int i = 0; i < 3; i++) {
+      nums[i] = readNumber("Digite o %dº número: ", i + 1);
+    }
 
-  inflacao = produto < 100 ? produto * 1.10 : produto * 1.20;
-  printf("O valor inflacionado e de: %g", inflacao);
+    if (nums[0] == nums[1] && nums[1] == nums[2]) {
+      printf("Todos os números sao iguais. Tente novamente.\n");
+    }
+  } while (nums[0] == nums[1] && nums[1] == nums[2]);
+
+  float max = nums[0];
+  for (int i = 1; i < 3; i++) {
+    if (nums[i] > max) {
+      max = nums[i];
+    }
+  }
+
+  printf("O maior valor é %f", max);
+  return 0;
 }
-#endif /* ifndef  */
+#endif /* ifdef ATV3 */
 
-#ifdef EX25
+#ifdef ATV4
+#include <stdbool.h>
+
+bool verificar_triangulo(int lados[3]) {
+  return lados[0] + lados[1] > lados[2] && lados[1] + lados[2] > lados[0] &&
+         lados[0] + lados[2] > lados[1];
+}
+
 int main() {
-  float weight;
-  float height;
+  int lados[3];
+  do {
+    for (int i = 0; i < 3; i++) {
+      do {
+        lados[i] = readNumber("Digite o %dº lado: ", i + 1);
+      } while (lados[i] <= 0);
+    }
 
-  printf("weight: ");
-  scanf("%f", &weight);
+    if (!verificar_triangulo(lados)) {
+      printf("Os lados informados não formam um triangulo. Tente novamente.\n");
+    }
+  } while (!verificar_triangulo(lados));
 
-  printf("height: ");
-  scanf("%f", &height);
+  char *tipo = "escaleno";
 
-  printf("%c\n", classify_person(height, weight));
+  if (lados[0] == lados[1] && lados[1] == lados[2]) {
+    tipo = "equilatero";
+  } else if (lados[0] == lados[1] || lados[1] == lados[2] ||
+             lados[0] == lados[2]) {
+    tipo = "isosceles";
+  }
+
+  printf("O triangulo é %s\n", tipo);
 
   return 0;
 }
-
-// bool isValidInput(void *input) { return ((char *)input)[0] == 'y'; }
-//
-// int main() {
-//   char result = ((char *)readCharWithValidation(isValidInput,
-//                                                 "Enter 'y' to continue:
-//                                                 "))[0];
-//
-//   printf("\nYou entered: %c\n", result);
-//
-//   return 0;
-// }
-#endif
+#endif /* ifdef ATV4 */
