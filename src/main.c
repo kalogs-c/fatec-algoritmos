@@ -1,7 +1,18 @@
-#include "lib.c"
+#include <stdarg.h>
 #include <stdio.h>
 
 #define ATV4
+
+float readNumber(char *message, ...) {
+  va_list args;
+  va_start(args, message);
+  float number;
+  vfprintf(stderr, message, args);
+  scanf("%f", &number);
+  va_end(args);
+
+  return number;
+}
 
 #ifdef ATV1
 #include <math.h>
