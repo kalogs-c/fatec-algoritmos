@@ -1,5 +1,6 @@
 #include <stdarg.h>
 #include <stdio.h>
+#include <string.h>
 
 #define ATV4
 
@@ -138,13 +139,13 @@ int main() {
     }
   } while (!verificarTriangulo(lados));
 
-  char *tipo = "escaleno";
+  char tipo[11] = "escaleno";
 
   if (lados[0] == lados[1] && lados[1] == lados[2]) {
-    tipo = "equilatero";
+    strcpy(tipo, "equilatero");
   } else if (lados[0] == lados[1] || lados[1] == lados[2] ||
              lados[0] == lados[2]) {
-    tipo = "isosceles";
+    strcpy(tipo, "isosceles");
   }
 
   printf("O triangulo e %s\n", tipo);
