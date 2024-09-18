@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define ATV4
+#define ATV1
 
 float readNumber(char *message, ...) {
   va_list args;
@@ -20,16 +20,16 @@ float readNumber(char *message, ...) {
 
 int main() {
   float result = 0;
-  float numeros[4];
+  float numeros[4] = {0, 0, 0, 0};
 
   do {
-    do {
+    while (numeros[0] <= 10 || numeros[0] >= 25) {
       numeros[0] = readNumber("Digite um valor entre 10 e 25: ");
-    } while (numeros[0] <= 10 || numeros[0] >= 25);
+    }
 
-    do {
+    while (numeros[1] <= 0) {
       numeros[1] = readNumber("Digite um valor maior que 0: ");
-    } while (numeros[1] <= 0);
+    };
 
     numeros[2] = numeros[0] + numeros[1];
     numeros[3] = numeros[0] * numeros[1] * numeros[2];
