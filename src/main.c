@@ -49,7 +49,7 @@ int main() {
 #endif /* ifdef ATV1 */
 
 #ifdef ATV2
-char get_conceito(float media_aproveitamento) {
+char getConceito(float media_aproveitamento) {
   if (media_aproveitamento >= 9.0) {
     return 'A';
   } else if (media_aproveitamento >= 7.5) {
@@ -78,7 +78,7 @@ int main() {
   float media_aproveitamento =
       (notas[0] + notas[1] * 2 + notas[2] * 3 + media_dos_ex) / 7;
 
-  char conceito = get_conceito(media_aproveitamento);
+  char conceito = getConceito(media_aproveitamento);
   char *status = conceito == 'D' || conceito == 'E' ? "REPROVADO" : "APROVADO";
 
   printf("O aluno de ID %d esta %s com média %.1f e conceito %c\n", id, status,
@@ -119,7 +119,7 @@ int main() {
 #ifdef ATV4
 #include <stdbool.h>
 
-bool verificar_triangulo(int lados[3]) {
+bool verificarTriangulo(int lados[3]) {
   return lados[0] + lados[1] > lados[2] && lados[1] + lados[2] > lados[0] &&
          lados[0] + lados[2] > lados[1];
 }
@@ -133,10 +133,10 @@ int main() {
       } while (lados[i] <= 0);
     }
 
-    if (!verificar_triangulo(lados)) {
+    if (!verificarTriangulo(lados)) {
       printf("Os lados informados nao formam um triangulo. Tente novamente.\n");
     }
-  } while (!verificar_triangulo(lados));
+  } while (!verificarTriangulo(lados));
 
   char *tipo = "escaleno";
 
