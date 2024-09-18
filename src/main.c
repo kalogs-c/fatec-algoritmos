@@ -1,8 +1,7 @@
 #include <stdarg.h>
 #include <stdio.h>
-#include <string.h>
 
-#define ATV1
+#define ATV2
 
 float readNumber(char *message, ...) {
   va_list args;
@@ -74,7 +73,10 @@ int main() {
     } while (notas[i] < 0 || notas[i] > 10);
   }
 
-  float media_dos_ex = readNumber("Digite a media dos exercícios: ");
+  float media_dos_ex;
+  do {
+    media_dos_ex = readNumber("Digite a media dos exercícios: ");
+  } while (media_dos_ex < 0 || media_dos_ex > 10);
 
   float media_aproveitamento =
       (notas[0] + notas[1] * 2 + notas[2] * 3 + media_dos_ex) / 7;
@@ -82,10 +84,20 @@ int main() {
   char conceito = getConceito(media_aproveitamento);
   char *status = conceito == 'D' || conceito == 'E' ? "REPROVADO" : "APROVADO";
 
-  printf("O aluno de ID %d esta %s com média %.1f e conceito %c\n", id, status,
-         media_aproveitamento, conceito);
+  printf("\n\n------------------------------\n");
+  printf("O aluno de ID %d esta %s\n Conceito: %c\n", id, status, conceito);
+
+  printf("\tNotas ----------\n");
+  for (int i = 0; i < 3; i++) {
+    printf("\t| Nota %i - %.1f |\n", i + 1, notas[i]);
+  }
+  printf("\t----------------\n");
+
+  printf("A media dos exercícios foi %.1f\n", media_dos_ex);
+  printf("A media do aproveitamento foi %.1f\n", media_aproveitamento);
 
   printf("%s\n", status);
+  printf("------------------------------\n");
 
   return 0;
 }
@@ -119,6 +131,7 @@ int main() {
 
 #ifdef ATV4
 #include <stdbool.h>
+#include <string.h>
 
 bool verificarTriangulo(int lados[3]) {
   return lados[0] + lados[1] > lados[2] && lados[1] + lados[2] > lados[0] &&
