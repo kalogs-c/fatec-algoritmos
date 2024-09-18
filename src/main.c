@@ -38,11 +38,11 @@ int main() {
     }
 
     if (result < 50000) {
-      printf("O resultado é menor que 50000");
+      printf("O resultado e menor que 50000");
     }
   } while (result < 50000);
 
-  printf("O resultado é %f\n", result);
+  printf("O resultado e %f\n", result);
 
   return 0;
 }
@@ -64,12 +64,12 @@ char get_conceito(float media_aproveitamento) {
 }
 
 int main() {
-  int id = readNumber("Digite o numero de identificação: ");
+  int id = readNumber("Digite o numero de identificacao: ");
   float notas[3];
 
   for (int i = 0; i < 3; i++) {
     do {
-      notas[i] = readNumber("Digite a %dº nota: ", i + 1);
+      notas[i] = readNumber("Digite a %d nota: ", i + 1);
     } while (notas[i] < 0 || notas[i] > 10);
   }
 
@@ -96,11 +96,11 @@ int main() {
 
   do {
     for (int i = 0; i < 3; i++) {
-      nums[i] = readNumber("Digite o %dº número: ", i + 1);
+      nums[i] = readNumber("Digite o %d numero: ", i + 1);
     }
 
     if (nums[0] == nums[1] && nums[1] == nums[2]) {
-      printf("Todos os números sao iguais. Tente novamente.\n");
+      printf("Todos os numeros sao iguais. Tente novamente.\n");
     }
   } while (nums[0] == nums[1] && nums[1] == nums[2]);
 
@@ -111,7 +111,7 @@ int main() {
     }
   }
 
-  printf("O maior valor é %f", max);
+  printf("O maior valor e %f", max);
   return 0;
 }
 #endif /* ifdef ATV3 */
@@ -129,12 +129,12 @@ int main() {
   do {
     for (int i = 0; i < 3; i++) {
       do {
-        lados[i] = readNumber("Digite o %dº lado: ", i + 1);
+        lados[i] = readNumber("Digite o %d lado: ", i + 1);
       } while (lados[i] <= 0);
     }
 
     if (!verificar_triangulo(lados)) {
-      printf("Os lados informados não formam um triangulo. Tente novamente.\n");
+      printf("Os lados informados nao formam um triangulo. Tente novamente.\n");
     }
   } while (!verificar_triangulo(lados));
 
@@ -147,7 +147,7 @@ int main() {
     tipo = "isosceles";
   }
 
-  printf("O triangulo é %s\n", tipo);
+  printf("O triangulo e %s\n", tipo);
 
   return 0;
 }
