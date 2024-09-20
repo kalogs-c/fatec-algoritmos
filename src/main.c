@@ -64,9 +64,12 @@ char getConceito(float media_aproveitamento) {
 }
 
 int main() {
-  int id = readNumber("Digite o numero de identificacao: ");
-  float notas[3];
+  int id;
+  do {
+    id = readNumber("Digite o numero de identificacao: ");
+  } while (id < 0);
 
+  float notas[3];
   for (int i = 0; i < 3; i++) {
     do {
       notas[i] = readNumber("Digite a %d nota: ", i + 1);
@@ -82,7 +85,8 @@ int main() {
       (notas[0] + notas[1] * 2 + notas[2] * 3 + media_dos_ex) / 7;
 
   char conceito = getConceito(media_aproveitamento);
-  char *status = conceito == 'D' || conceito == 'E' ? "REPROVADO" : "APROVADO";
+  char *status =
+      (conceito == 'D' || conceito == 'E') ? "REPROVADO" : "APROVADO";
 
   printf("\n\n------------------------------\n");
   printf("O aluno de ID %d esta %s\n Conceito: %c\n", id, status, conceito);
@@ -124,7 +128,7 @@ int main() {
     }
   }
 
-  printf("O maior valor e %f", max);
+  printf("O maior valor e %g\n", max);
   return 0;
 }
 #endif /* ifdef ATV3 */
@@ -148,6 +152,7 @@ int main() {
     }
 
     if (!verificarTriangulo(lados)) {
+
       printf("Os lados informados nao formam um triangulo. Tente novamente.\n");
     }
   } while (!verificarTriangulo(lados));
