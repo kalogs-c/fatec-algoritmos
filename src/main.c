@@ -1,7 +1,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#define ATV2
+#define ATV1
 
 float readNumber(char *message, ...) {
   va_list args;
@@ -38,7 +38,10 @@ int main() {
     }
 
     if (result < 50000) {
-      printf("O resultado e menor que 50000");
+      puts("O resultado e menor que 50000");
+      for (int i = 0; i < 4; i++) {
+        numeros[i] = 0;
+      }
     }
   } while (result < 50000);
 
@@ -78,7 +81,7 @@ int main() {
 
   float media_dos_ex;
   do {
-    media_dos_ex = readNumber("Digite a media dos exercícios: ");
+    media_dos_ex = readNumber("Digite a media dos exercicios: ");
   } while (media_dos_ex < 0 || media_dos_ex > 10);
 
   float media_aproveitamento =
@@ -88,20 +91,20 @@ int main() {
   char *status =
       (conceito == 'D' || conceito == 'E') ? "REPROVADO" : "APROVADO";
 
-  printf("\n\n------------------------------\n");
-  printf("O aluno de ID %d esta %s\n Conceito: %c\n", id, status, conceito);
+  puts("------------------------------");
+  printf("O aluno de ID %d esta %s\nConceito: %c\n", id, status, conceito);
 
-  printf("\tNotas ----------\n");
+  puts("Notas ----------");
   for (int i = 0; i < 3; i++) {
-    printf("\t| Nota %i - %.1f |\n", i + 1, notas[i]);
+    printf("| Nota %i - %.1f |\n", i + 1, notas[i]);
   }
-  printf("\t----------------\n");
+  puts("----------------");
 
-  printf("A media dos exercícios foi %.1f\n", media_dos_ex);
+  printf("A media dos exercicios foi %.1f\n", media_dos_ex);
   printf("A media do aproveitamento foi %.1f\n", media_aproveitamento);
 
   printf("%s\n", status);
-  printf("------------------------------\n");
+  puts("------------------------------");
 
   return 0;
 }
@@ -117,7 +120,7 @@ int main() {
     }
 
     if (nums[0] == nums[1] && nums[1] == nums[2]) {
-      printf("Todos os numeros sao iguais. Tente novamente.\n");
+      puts("Todos os numeros sao iguais. Tente novamente.");
     }
   } while (nums[0] == nums[1] && nums[1] == nums[2]);
 
@@ -152,8 +155,7 @@ int main() {
     }
 
     if (!verificarTriangulo(lados)) {
-
-      printf("Os lados informados nao formam um triangulo. Tente novamente.\n");
+      puts("Os lados informados nao formam um triangulo. Tente novamente.");
     }
   } while (!verificarTriangulo(lados));
 
